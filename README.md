@@ -22,7 +22,7 @@ react移动端项目
 ├── src
 │   ├── index.js                入口js
 │ 	├── index.css               入口css
-│	├── App.js                	主组件js
+│	  ├── App.js                	主组件js
 │ 	├── App.css                	主组件css
 │   ├── serviceWorker.js
 │ 
