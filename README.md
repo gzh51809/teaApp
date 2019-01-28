@@ -14,19 +14,23 @@ react移动端项目
 
 ### 项目目录结构
 ```
-.
-├── README.md
-├── node_modules
-├── package-lock.json
-├── package.json
-├── src
-│   ├── index.js                入口js
-│ 	├── index.css               入口css
-│	├── App.js                	主组件js
-│ 	├── App.css                	主组件css
-│   ├── serviceWorker.js
-│ 
-├── public
-│ 	├── index.hmtl              模板
+|—— node_modules
+|—— package.json
+|—— package-lock.json
+|—— config
+|—— scripts
+	|—— build.js
+	|—— start.js
+	|—— test.js
+|—— public
+	|—— index.html
+	|—— favicon.ico
+	|—— manifest.json
+|—— src
+	|—— App.js
+	|—— index.js
+	|—— serviceWorker.js
+|—— .gitignore
+|—— READNE.md
 ```
 
