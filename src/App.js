@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import {Switch,Route,Redirect} from 'react-router-dom';
 import Home from './page/home';
-import Sweep from './page/home/sweep';
-import Notice from './page/home/notice';
+import Sweep from './page/home/component/sweep';
+import Notice from './page/home/component/notice';
 import Category from './page/category';
 import Find from './page/find';
 import Cart from './page/cart';
+import Detail from './page/detail';
 import Mine from './page/mine';
+import Setting from './page/mine/component/setting';
+import Login from './page/mine/component/login';
 import List from './page/list';
 
-import './App.scss';
+import './sass/App.scss';
 import 'antd/dist/antd.css';
 import './iconfont/iconfont.css';
-import axios from'axios';
-const axiosurl='http://localhost:4005';
+import axios from 'axios';
+const axiosurl='http://39.108.252.230:4005';
 axios.axiosurl=axiosurl;
 
 class App extends Component {
@@ -27,8 +30,11 @@ class App extends Component {
             <Route path='/category' component={Category}/>
             <Route path='/find' component={Find}/>
             <Route path='/cart' component={Cart}/>
+            <Route path='/detail/:goodsid' component={Detail}/>
             <Route path='/mine' component={Mine}/>
-            <Route path='/list' component={List}/>
+            <Route path='/setting' component={Setting}/>
+            <Route path='/login' component={Login}/>
+            <Route path='/list/:cid' component={List}/>
             <Redirect from='/' to='/home'/>
         </Switch>
       </div>

@@ -1,6 +1,8 @@
 import React,{Component} from 'react';
-import {Carousel} from 'antd';
-import Swiper from '../../../component/swiper';
+// import {Carousel} from 'antd';
+// import Swiper from '../../../component/swiper';
+import NewSwiper from '../../../component/newSwiper';
+import {withRouter} from 'react-router-dom';
 
 class CarouseHome extends Component{
     constructor(){
@@ -10,21 +12,30 @@ class CarouseHome extends Component{
                 {
                     text:'趣味拼团',
                     imgurl:'banner/banner1.jpg',
-                    goodsId:57
+                    goodsid:0
                 },
                 {
                     text:'商品1',
                     imgurl:'banner/banner2.jpg',
-                    goodsId:54
+                    goodsid:54
                 },{
                     text:'商品2',
                     imgurl:'banner/banner3.jpg',
-                    goodsId:53
+                    goodsid:53
                 }
             ]
         }
+
+        this.handleClick=this.handleClick.bind(this);
     }
 
+    handleClick(goodsId){
+        if(goodsId===0){
+            return
+        }else{
+            this.props.history.push('/detail/'+goodsId)
+        }
+    }
     render(){
         return (
             <div className='carouse'>
@@ -39,10 +50,11 @@ class CarouseHome extends Component{
                         })
                     }
                 </Carousel> */}
-                <Swiper type={'img'} direction={false} data={this.state.recommend}/>
+                {/* <Swiper type={'img'} direction={false} data={this.state.recommend}/> */}
+                <NewSwiper type={'img'} direction={'horizontal'} data={this.state.recommend} handleClick={this.handleClick}/>
             </div>
         )
     }
 }
-
+CarouseHome=withRouter(CarouseHome);
 export default CarouseHome

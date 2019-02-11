@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import {withRouter} from 'react-router-dom';
 
 class Nav extends Component{
     constructor(){
@@ -7,29 +8,34 @@ class Nav extends Component{
             icon:[
                 {
                     name:'普洱茶',
-                    icon:require('../../../image/icon/navIcon1.png'),
-                    cid:57
+                    icon:require('../image/navIcon1.png'),
+                    cid:2
                 },{
                     name:'红茶',
-                    icon:require('../../../image/icon/navIcon2.png'),
-                    cid:57
+                    icon:require('../image/navIcon2.png'),
+                    cid:3
                 },{
                     name:'绿茶',
-                    icon:require('../../../image/icon/navIcon3.png'),
-                    cid:57
+                    icon:require('../image/navIcon3.png'),
+                    cid:1
                 },{
                     name:'白茶',
-                    icon:require('../../../image/icon/navIcon4.png'),
-                    cid:57
+                    icon:require('../image/navIcon4.png'),
+                    cid:4
                 },{
                     name:'茶具',
-                    icon:require('../../../image/icon/navIcon5.png'),
-                    cid:57
+                    icon:require('../image/navIcon5.png'),
+                    cid:9
                 }
             ]
         }
     }
 
+    handleClick(cid){
+        // console.log(this);
+        let {history}=this.props;
+        history.push('/list/'+cid);
+    }
     render(){
         return (
             <div className='nav'>
@@ -37,7 +43,7 @@ class Nav extends Component{
                     {
                         this.state.icon.map(item=>{
                             return (
-                                <li key={item.name}>
+                                <li key={item.name} onClick={this.handleClick.bind(this,item.cid)}>
                                     <img src={item.icon} alt=''/>
                                     <span>{item.name}</span>
                                 </li>
@@ -50,4 +56,5 @@ class Nav extends Component{
     }
 }
 
+Nav=withRouter(Nav);
 export default Nav

@@ -1,15 +1,12 @@
-let defaultState = {
-    name:'test',
-    price:1000
-}
+let defaultState = {}
 let reducer = function(state=defaultState,action){
     let {type,payload}=action;
 
     switch(type){
-        case 'CHANG_PRICE':
+        case 'CAHNGE_DATA':
             return {
                 ...state,
-                price:payload.price
+                renderData:payload
             }
 
         default:

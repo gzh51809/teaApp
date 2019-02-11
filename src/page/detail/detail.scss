@@ -1,0 +1,134 @@
+.detail{
+    .main{
+        width:100%;
+        .header{
+            width: 100%;
+            height:50px;
+            background:#fff;
+            display: flex;
+            align-items: center;
+            padding:0 15px;
+            margin-bottom:8px;
+            position: fixed;
+            top:0;
+            left:0;
+            z-index: 33;
+            span{
+                display: block;
+                width:45%;
+            }
+            .iconfont {
+                font-size:24px;
+            }
+        }
+        .ant-carousel {
+            width:100%;
+            margin-top:50px;
+            .slick-slide img{
+                width:100%;
+            }
+            .slick-dots{
+                bottom:20px;
+                .slick-active{
+                    button{
+                        background: #e9ab5e;
+                    }
+                }
+            }
+        }
+        .detail{
+            background:#fff;
+            padding:18px 0 10px 13px;
+            font-size: 12px;
+            line-height: 24px;
+            color:#999;
+            .name{
+                font-size: 14px;
+                color:#333;
+                font-weight:500;
+            }
+            .price{
+                color:#e9ab5e;
+                font-size: 14px;
+                font-weight:500;
+            }
+            .number{
+                margin:3px 0;
+                .ant-input-number{
+                    margin-left:10px;
+                }
+                span{
+                    display: inline-block;
+                    margin-right:10px;
+                }
+                input{
+                    height:30px;
+                    width:30px;
+                    text-align:center;
+                    background:#fff;
+                    font-size:16px;
+                    border:1px solid #ccc;
+                }
+                .num{
+                    width: 60px;
+                }
+            }
+        }
+        .titleBar{
+            background:#fff;
+            margin-top:8px;
+            height:50px;
+        }
+        .iconBar{
+            height:50px;
+            background:#fff;
+            margin-top:5px;
+            .more{
+                color:#999;
+                img{
+                    width: 30px;
+                }
+            }
+        }
+        .imgDes{
+            padding:1px 1px 5px 1px;
+            img{
+                width: 100%;
+            }
+        }
+    }
+    .myfooter{
+        display: flex;
+        align-items: center;
+        height:55px;
+        background:#fff;
+        border-top:2px solid #f8f8f8;
+        ul{
+            display: flex;
+            height:55px;
+            align-items: center;
+            justify-content: space-around;
+            width: 50%;
+            li{
+                font-size:12px;
+                .iconfont{
+                    font-size:22px;
+                }
+            }
+        }
+        >span{
+            display: inline-block;
+            width:28%;
+            text-align:center;
+            line-height: 55px;
+            color:#fff;
+            background: #f40;
+            font-size:14px;
+        }
+        >span:nth-child(3){
+            width:22%;
+            background:#e9ab5e;
+        }
+
+    }
+}

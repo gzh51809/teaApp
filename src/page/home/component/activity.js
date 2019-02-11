@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Carousel} from 'antd';
+// import {Carousel} from 'antd';
 import Swiper from '../../../component/swiper';
 
 class Activity extends Component{
@@ -8,15 +8,15 @@ class Activity extends Component{
         this.state={
             text:[
                 {
-                    text:'广盛昌 陈皮白茶第1期开奖公告：'
+                    title:'广盛昌 陈皮白茶第1期开奖公告'
                 },{
-                    text:'一等奖 679962'
+                    title:'一等奖 679962'
                 },{
-                    text:'二等奖 896157,688282'
+                    title:'二等奖 896157,688282'
                 },{
-                    text:'三等奖 775145,676728,729354'
+                    title:'三等奖 775145,676728,729354'
                 },{
-                    text:'四等奖 963398,617847,919656'
+                    title:'四等奖 963398,617847,919656'
                 }
             ]
         }
@@ -25,7 +25,7 @@ class Activity extends Component{
         return (
             <div className='activity'>
                 <div className='actImg'>
-                    <img src={require('../../../image/ad.png')} alt=''/>
+                    <img src={require('../image/ad.png')} alt=''/>
                 </div>
                 <div className='actName'>
                     <div className='notice'></div>
@@ -42,6 +42,21 @@ class Activity extends Component{
                     </Carousel> */}
                     <Swiper type={'text'} direction={false} data={this.state.text}/>
                 </div>
+                <div className='moreAct'>
+                    趣味拼团
+                    <span>更多拼团在这里</span>
+                </div>
+                <ul className='detail'>
+                    <li>
+                        <img src={require('../image/adBuy.jpeg')} alt=''/>
+                        <div className='text'>
+                            <span></span>
+                            <p className='name'>哈哈哈啊哈hahahhaah</p>
+                            <p className='price'>¥99.00</p>
+                            <p className='hot'>已有xxxxx</p>
+                        </div>
+                    </li> 
+                </ul>
             </div>
         )
     }

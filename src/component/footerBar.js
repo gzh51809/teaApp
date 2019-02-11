@@ -73,7 +73,7 @@ class FooterBar extends Component {
                     this.state.menu.map(menu=>{
                       return (
                         <Menu.Item key={menu.path}>
-                          <Badge count={menu.name==='Cart'?5:null}>
+                          <Badge count={menu.name==='Cart'?0:null}>
                             <span className={'iconfont '+menu.icon}></span>
                             <span>{menu.text}</span>
                             </Badge>

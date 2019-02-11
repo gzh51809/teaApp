@@ -1,0 +1,51 @@
+.login{
+    background:#fff;
+    .main{
+        .header{
+            height:50px;
+            background:#fff;
+            display: flex;
+            align-items: center;
+            padding:0 15px;
+            .iconfont {
+                font-size:24px;
+            }
+        }
+        .loginForm{
+            .logo{
+                height:200px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img{
+                    display: inline-block;
+                    width:100px;
+                }
+            }
+            .ant-form{
+                padding:0 36px;
+                .ant-row{
+                    margin-bottom:20px;
+                    .ant-input{
+                        border:0 none;
+                        border-bottom:1px solid#d8ac74;
+                        padding-left:50px;
+                    }
+                    .ant-input:hover{
+                        color:#999;
+                    }
+                    .anticon{
+                        font-size:26px;
+                    }
+                }
+                .ant-btn-primary{
+                    color:#fff;
+                    background:#d8ac74;
+                    border:1px solid#d8ac74;
+                    height:40px;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

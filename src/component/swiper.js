@@ -2,22 +2,22 @@ import React from 'react';
 import {Carousel} from 'antd';
 
 const Swiper=({type,direction,data})=>{
-    console.log(type,direction,data);
+    // console.log(type,direction,data);
     if(type==='img'){
         return (
-            <div>
+            // <div>
                 <Carousel autoplay vertical={direction} dots={true}>
                     {
-                        data.map(item=>{
+                        data.map((item,idx)=>{
                             return (
-                                <div key={item.text}>
-                                    <img src={item.imgurl} alt=''/>
+                                <div key={idx}>
+                                    <img src={item} alt=''/>
                                 </div>
                             )
                         })
                     }
                 </Carousel>
-            </div>
+            // </div>
         )
     }else{
         return (
@@ -26,7 +26,7 @@ const Swiper=({type,direction,data})=>{
                     data.map((item,idx)=>{
                         return (
                             <p key={idx}>
-                                {item.text}
+                                {item.title}
                             </p>
                         )
                     })

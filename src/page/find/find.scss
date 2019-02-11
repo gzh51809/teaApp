@@ -1,0 +1,81 @@
+.find{
+    .main{
+        width:100%;
+        .header{
+            width:100%;
+            height:50px;
+            text-align:center;
+            line-height:50px;
+            position: fixed;
+            top:0;
+            left:0;
+            z-index:33;
+            padding:0 15px;
+            font-size:18px;
+            font-weight:500;
+            background:#fff;
+            .icon-kefu1{
+                float:right;
+                font-size: 24px;
+            }
+        }
+        .ant-carousel {
+            width:100%;
+            background:#fff;
+            margin-top:50px;
+            padding:0 20px;
+            .slick-slide img{
+                width:100%;
+            }
+            .slick-dots{
+                bottom:6px;
+                .slick-active{
+                    button{
+                        background: #e9ab5e;
+                    }
+                }
+            }
+        }
+        ul{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            // background:#fff;
+            margin-bottom:10px;
+            padding:10px 0;
+            img{
+                margin-bottom:8px;
+            }
+        }
+        .mainMenu{
+            background:#fff;
+            li{
+                img{
+                    width: 60px;
+                    height:60px;
+                }
+            }
+        }
+        .business{
+            background:#fff;
+            li{
+                width: 33%;
+                font-size:13px;
+                margin:13px 0;
+                img{
+                    width: 40px;
+                    height:40px;
+                }
+            }
+        }
+        p{
+            width:100%;
+            text-align:center;
+            font-size:13px;
+            line-height: 30px;
+            margin-bottom:6px;
+            color:#999;
+        }
+    }
+}

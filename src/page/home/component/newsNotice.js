@@ -1,24 +1,33 @@
 import React,{Component} from 'react';
 import Swiper from '../../../component/swiper';
+// import NewSwiper from '../../../component/newSwiper';
+import axios from'axios';
 
 class NewsNotice extends Component{
     constructor(){
         super();
         this.state={
-            news:[
-                {
-                    text:'趣味拼团',
-                    _id:57
-                },
-                {
-                    text:'商品1',
-                    _id:54
-                },{
-                    text:'商品2',
-                    _id:53
-                }
-            ]
+            news:[]
         }
+    }
+
+    // componentWillMount(){
+    //     axios.get('http://39.108.252.230:4005/news').then(res=>{
+    //         // console.log(res.data)
+    //         this.setState({
+    //             news:res.data.data
+    //         })
+    //     })
+    // }
+    componentWillMount(){
+        axios.get(`${axios.axiosurl}/news/list`,{
+            params:{}
+        }).then(res=>{
+            // console.log(res.data)
+            this.setState({
+                news:res.data.data
+            })
+        })
     }
 
     render(){
@@ -37,6 +46,7 @@ class NewsNotice extends Component{
                     }
                 </Carousel> */}
                 <Swiper type={'text'} direction={true} data={this.state.news}/>
+                {/* <NewSwiper type={'text'} direction={'vertical'} data={this.state.news}/> */}
                 <div className='more'>
                     <span className='iconfont icon-arrow-right-copy'></span>
                 </div>
