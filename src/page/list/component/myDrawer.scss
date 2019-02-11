@@ -4,30 +4,30 @@
         .ant-drawer-body{
             padding:0;
             .title{
-                height: 45px;
-                padding:0 15px;
+                height: 2.8125rem;
+                padding:0 .9375rem;
                 background:#fff;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                font-size: 12px;
-                margin-bottom:8px;
+                font-size: .75rem;
+                margin-bottom:.5rem;
                 strong{
-                    font-size: 14px;
+                    font-size: .875rem;
                 }
             }
             .detail{
                 background:#fff;
                 h2{
-                    height:40px;
-                    padding:0 15px;
+                    height:2.5rem;
+                    padding:0 .9375rem;
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    font-size: 12px;
-                    border-bottom:1px solid #f8f8f8;
+                    font-size: .75rem;
+                    border-bottom:.0625rem solid #f8f8f8;
                     .iconfont{
-                        font-size:12px;
+                        font-size:.75rem;
                         color:#ccc;
                     }
                 }

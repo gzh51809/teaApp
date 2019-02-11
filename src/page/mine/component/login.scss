@@ -2,47 +2,47 @@
     background:#fff;
     .main{
         .header{
-            height:50px;
+            height:3.125rem;
             background:#fff;
             display: flex;
             align-items: center;
-            padding:0 15px;
+            padding:0 .9375rem;
             .iconfont {
-                font-size:24px;
+                font-size:1.5rem;
             }
         }
         .loginForm{
             .logo{
-                height:200px;
+                height:12.5rem;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 img{
                     display: inline-block;
-                    width:100px;
+                    width:6.25rem;
                 }
             }
             .ant-form{
-                padding:0 36px;
+                padding:0 2.25rem;
                 .ant-row{
-                    margin-bottom:20px;
+                    margin-bottom:1.25rem;
                     .ant-input{
                         border:0 none;
-                        border-bottom:1px solid#d8ac74;
-                        padding-left:50px;
+                        border-bottom:.0625rem solid#d8ac74;
+                        padding-left:3.125rem;
                     }
                     .ant-input:hover{
                         color:#999;
                     }
                     .anticon{
-                        font-size:26px;
+                        font-size:1.625rem;
                     }
                 }
                 .ant-btn-primary{
                     color:#fff;
                     background:#d8ac74;
-                    border:1px solid#d8ac74;
-                    height:40px;
+                    border:.0625rem solid#d8ac74;
+                    height:2.5rem;
                     width: 100%;
                 }
             }

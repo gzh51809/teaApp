@@ -1,7 +1,4 @@
 .goodsItem{
-    // display: flex;
-    // flex-wrap: wrap;
-    
     li{
         float:left;
         width:49.5%;
@@ -10,11 +7,8 @@
         background:#fff;
         margin-left:.0625rem;
         img{
-            // width:8.75rem;
             width:100%;
             height: 6.25rem;
-            // height:8.75rem;
-            // margin:0 .625rem;
         }
         .text{
             padding:.625rem 1.25rem 1.25rem .625rem;

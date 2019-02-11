@@ -1,39 +1,38 @@
 .cart{
     .main{
         width:100%;
-        height:1000px;
         .header{
             width:100%;
-            height:50px;
+            height:3.125rem;
             text-align:center;
-            line-height:50px;
+            line-height:3.125rem;
             position: fixed;
             top:0;
             left:0;
             z-index:33;
-            padding:0 15px;
-            font-size:18px;
+            padding:0 .9375rem;
+            font-size:1.125rem;
             font-weight:500;
             background:#fff;
         }
         .cartList{
-            margin-top:56px;
+            margin-top:3.5rem;
             .cartItem{
                 background: #fff;
-                margin-bottom:6px;
+                margin-bottom:.375rem;
             }
             .cartBrand{
                 display: flex;
-                height:40px;
+                height:2.5rem;
                 justify-content: space-between;
                 align-items: center;
-                padding:0 10px;
+                padding:0 .625rem;
                 .iconBar{
                     border:0 none;
                     p{color:#333;}
                     img{
-                        width: 30px;
-                        height:30px;
+                        width: 1.875rem;
+                        height:1.875rem;
                     }
                 }
             }
@@ -41,33 +40,33 @@
                 li{
                     display: flex;
                     align-items: center;
-                    padding:15px 10px;
-                    border-top:2px solid #f7f7f7;
+                    padding:.9375rem .625rem;
+                    border-top:.125rem solid #f7f7f7;
                     img{
                         display: block;
-                        border:1px solid #ccc;
-                        width:75px;
-                        height:75px;
-                        margin:0 15px;
+                        border:.0625rem solid #ccc;
+                        width:4.6875rem;
+                        height:4.6875rem;
+                        margin:0 .9375rem;
                     }
                     >div{
                         color:#333;
-                        line-height: 24px;
-                        font-size:14px;
+                        line-height: 1.5rem;
+                        font-size:.875rem;
                         input{
-                            height:25px;
-                            width:30px;
+                            height:1.5625rem;
+                            width:1.875rem;
                             text-align:center;
                             background:#fff;
-                            font-size:16px;
-                            border:1px solid #ccc;
+                            font-size:1rem;
+                            border:.0625rem solid #ccc;
                         }
                         .num{
-                            width: 50px;
+                            width: 3.125rem;
                         }
                         .price{
                             color:#e9ab5e;
-                            font-size: 14px;
+                            font-size: .875rem;
                             font-weight:500;
                         }
                     }
@@ -78,19 +77,19 @@
     .cartFooter{
         background: #fff;
         width:100%;
-        padding-left:20px;
+        padding-left:1.25rem;
         >div{
             width:100%;
-            height:50px;
+            height:3.125rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 14px;
+            font-size: .875rem;
             color:#333;
             label{
                 width:20%;
                 input{
-                    margin-right:5px;
+                    margin-right:.3125rem;
                 }
             }
             p{
@@ -103,7 +102,7 @@
             button{
                 width:35%;
                 height: 100%;
-                font-size:16px;
+                font-size:1rem;
                 display: block;
                 justify-content: center;
                 align-items: center;

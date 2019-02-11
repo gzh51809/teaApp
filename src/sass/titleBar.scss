@@ -1,17 +1,17 @@
 .titleBar{
     width:100%;
-    height:40px;
-    padding:0 15px;
+    height:2.5rem;
+    padding:0 .9375rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 13px;
-    border-bottom:2px solid #f7f7f7;
+    font-size: .8125rem;
+    border-bottom:.125rem solid #f7f7f7;
     .more{
         color:#999;
-        font-size:12px;
+        font-size:.75rem;
         .iconfont{
-            font-size:12px;
+            font-size:.75rem;
             color:#999;
         }
     }

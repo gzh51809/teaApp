@@ -2,40 +2,40 @@
     .main{
         width:100%;
         .header{
-            height:50px;
+            height:3.125rem;
             background:#fff;
             display: flex;
             align-items: center;
-            padding:0 15px;
-            margin-bottom:8px;
+            padding:0 .9375rem;
+            margin-bottom:.5rem;
             span{
                 display: block;
                 width:45%;
             }
             .iconfont {
-                font-size:24px;
+                font-size:1.5rem;
             }
         }
         .detail{
             .titleBar{
                 background: #fff;
-                height:50px;
+                height:3.125rem;
             }
             .titleBar:nth-child(2){
-                margin-bottom:3px;
+                margin-bottom:.1875rem;
             }
         }
         .btn{
             width:100%;
-            padding:10px;
-            margin-top:5px;
+            padding:.625rem;
+            margin-top:.3125rem;
             button{
-                height:40px;
+                height:2.5rem;
                 background:#d8ac74;
                 width:100%;
                 display: block;
                 text-align:center;
-                line-height: 40px;
+                line-height: 2.5rem;
                 color:#fff;
             }
         }

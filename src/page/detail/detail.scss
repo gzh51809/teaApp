@@ -3,12 +3,12 @@
         width:100%;
         .header{
             width: 100%;
-            height:50px;
+            height:3.125rem;
             background:#fff;
             display: flex;
             align-items: center;
-            padding:0 15px;
-            margin-bottom:8px;
+            padding:0 .9375rem;
+            margin-bottom:.5rem;
             position: fixed;
             top:0;
             left:0;
@@ -18,17 +18,17 @@
                 width:45%;
             }
             .iconfont {
-                font-size:24px;
+                font-size:1.5rem;
             }
         }
         .ant-carousel {
             width:100%;
-            margin-top:50px;
+            margin-top:3.125rem;
             .slick-slide img{
                 width:100%;
             }
             .slick-dots{
-                bottom:20px;
+                bottom:1.25rem;
                 .slick-active{
                     button{
                         background: #e9ab5e;
@@ -38,60 +38,60 @@
         }
         .detail{
             background:#fff;
-            padding:18px 0 10px 13px;
-            font-size: 12px;
-            line-height: 24px;
+            padding:1.125rem 0 .625rem .8125rem;
+            font-size: .75rem;
+            line-height: 1.5rem;
             color:#999;
             .name{
-                font-size: 14px;
+                font-size: .875rem;
                 color:#333;
                 font-weight:500;
             }
             .price{
                 color:#e9ab5e;
-                font-size: 14px;
+                font-size: .875rem;
                 font-weight:500;
             }
             .number{
-                margin:3px 0;
+                margin:.1875rem 0;
                 .ant-input-number{
-                    margin-left:10px;
+                    margin-left:.625rem;
                 }
                 span{
                     display: inline-block;
-                    margin-right:10px;
+                    margin-right:.625rem;
                 }
                 input{
-                    height:30px;
-                    width:30px;
+                    height:1.875rem;
+                    width:1.875rem;
                     text-align:center;
                     background:#fff;
-                    font-size:16px;
-                    border:1px solid #ccc;
+                    font-size:1rem;
+                    border:.0625rem solid #ccc;
                 }
                 .num{
-                    width: 60px;
+                    width: 3.75rem;
                 }
             }
         }
         .titleBar{
             background:#fff;
-            margin-top:8px;
-            height:50px;
+            margin-top:.5rem;
+            height:3.125rem;
         }
         .iconBar{
-            height:50px;
+            height:3.125rem;
             background:#fff;
-            margin-top:5px;
+            margin-top:.3125rem;
             .more{
                 color:#999;
                 img{
-                    width: 30px;
+                    width: 1.875rem;
                 }
             }
         }
         .imgDes{
-            padding:1px 1px 5px 1px;
+            padding:.0625rem .0625rem .3125rem .0625rem;
             img{
                 width: 100%;
             }
@@ -100,19 +100,19 @@
     .myfooter{
         display: flex;
         align-items: center;
-        height:55px;
+        height:3.4375rem;
         background:#fff;
-        border-top:2px solid #f8f8f8;
+        border-top:.125rem solid #f8f8f8;
         ul{
             display: flex;
-            height:55px;
+            height:3.4375rem;
             align-items: center;
             justify-content: space-around;
             width: 50%;
             li{
-                font-size:12px;
+                font-size:.75rem;
                 .iconfont{
-                    font-size:22px;
+                    font-size:1.375rem;
                 }
             }
         }
@@ -120,10 +120,10 @@
             display: inline-block;
             width:28%;
             text-align:center;
-            line-height: 55px;
+            line-height: 3.4375rem;
             color:#fff;
             background: #f40;
-            font-size:14px;
+            font-size:.875rem;
         }
         >span:nth-child(3){
             width:22%;
