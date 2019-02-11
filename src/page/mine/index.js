@@ -1,8 +1,9 @@
 import React,{Component} from 'react';
 import FooterBar from '../../component/footerBar';
-import ImgIcon from '../../component/imgItem';
 import TitleBar from '../../component/titleBar';
-import IconBar from '../../component/iconBar';
+import MineTop from './component/mineTop';
+import MyIcon from './component/myIcon';
+import MyItem from './component/myItem';
 import axios from'axios';
 import './mine.scss';
 
@@ -83,33 +84,33 @@ class Mine extends Component{
         this.goto=this.goto.bind(this);
     }
 
-    componentDidMount(){
-        if(localStorage.getItem("tokenData")){
-            let storage=JSON.parse(localStorage.getItem("tokenData"));
-            let token=storage.token;
-              axios.get(`${axios.axiosurl}/token`,{
-                headers:{
-                  token
-                }
-              }).then(res=>{
-                if(res.data.code===200){
-                  let tel=(storage.tel).slice(3,9);
-                  let userTel=(storage.tel).replace(tel,'****');
-                    
-                  this.setState({
-                      currentStatus:userTel,
-                      needLogin:false
-                  })
+    async componentDidMount(){
+        let storage=JSON.parse(localStorage.getItem("tokenData"));
 
-                  }else{
-                    this.setState({
-                        currentStatus:'登录',
-                        needLogin:true
-                    })
-                  }
+        if(!storage){
+            this.noLogin=true;
+        }else{
+            let token=storage.token;
+            let res=await axios.get(`${axios.axiosurl}/token`,{
+                headers:{
+                    token
+                }
+            });
+
+            if(res.data.code===200){
+                let tel=(storage.tel).slice(3,9);
+                let userTel=(storage.tel).replace(tel,'****');
+                  
+                this.setState({
+                    currentStatus:userTel,
+                    needLogin:false
                 })
             }else{
-              this.noLogin=true;
+                this.setState({
+                    currentStatus:'登录',
+                    needLogin:true
+                })
+            }
         }
     }
 
@@ -128,49 +129,25 @@ class Mine extends Component{
         return (
             <div className="page mine">
                 <div className="main">
-                    <div className='mineTop'>
-                        <h2>
-                            <i className='iconfont icon-tongzhi'></i>
-                        </h2>
-                        <ul className='myLogo'>
-                            {
-                                this.state.myLogo.map(item=>{
-                                    return (
-                                        <ImgIcon data={item} key={item.text} handleClick={this.goto}/>
-                                    )
-                                })
-                            }
-                        </ul>
-                        <p className='myStatus'>
-                            <span onClick={this.handleClick}>{this.state.currentStatus}</span>
-                            <img src={require('./image/logo.png')} alt='' onClick={this.handleClick}/>
-                        </p>
-                    </div>
+                    <MineTop 
+                    data={this.state.myLogo}
+                    goto={this.goto}
+                    handleClick={this.handleClick}
+                    currentStatus={this.state.currentStatus}
+                    />
                     <div className='myOrder'>
-                        <TitleBar data={{'text_l':'我的订单','text_r':'查看全部订单','type':'icon'}}/>
+                        <TitleBar 
+                        data={{
+                            'text_l':'我的订单',
+                            'text_r':'查看全部订单',
+                            'type':'icon'}}
+                        />
                     </div>
-                    <ul className='myItem'>
-                        {
-                            this.state.myItem.map(item=>{
-                                return(
-                                    <ImgIcon data={item} key={item.text} handleClick={this.goto}/>
-                                )
-                            })
-                        }
-                    </ul>
-                    <div className='myIcon'>
-                        {
-                            this.state.myIcon.map(item=>{
-                                return(
-                                    <IconBar data={item} key={item.text}/>
-                                )
-                            })
-                        }
-                    </div>
+                    <MyItem data={this.state.myItem} goto={this.goto}/>
+                    <MyIcon data={this.state.myIcon}/>
                 </div>
                 <FooterBar/>
-            </div>
-            
+            </div> 
         )
     }
 }

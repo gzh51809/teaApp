@@ -19,7 +19,6 @@ class goodsHot extends Component{
                 qty:6
             }
         }).then(res=>{
-            // console.log(res.data)
             this.setState({
                 goods:res.data.data
             })

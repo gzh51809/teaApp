@@ -27,11 +27,9 @@ class HeaderBar extends Component{
                 axios.get(`${axios.axiosurl}/list/like`,{
                     params:{
                         keyword:this.state.keyword,
-                        // rule:this.state.current
                     }
                 }).then(res=>{
                     let {search}=this.props;
-                    // console.log(res.data)
                     search(res.data.data);
                 })
             },1000)

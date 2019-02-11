@@ -32,7 +32,6 @@ class Nav extends Component{
     }
 
     handleClick(cid){
-        // console.log(this);
         let {history}=this.props;
         history.push('/list/'+cid);
     }

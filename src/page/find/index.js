@@ -55,10 +55,8 @@ class Find extends Component{
         this.handleClick=this.handleClick.bind(this);
     }
 
-    handleClick(){
-        // console.log(goodsid,this)
-        // this.props.history.push('/detail/goodsid')
-    }
+    handleClick(){}
+    
     render(){
         return (
             <div className="page find">
@@ -67,22 +65,35 @@ class Find extends Component{
                         <span>发现</span>
                         <span className='iconfont icon-kefu1'></span>
                     </h2>
-                    <Swiper type={'img'} direction={false} data={this.state.recommend}/>
+                    <Swiper 
+                    type={'img'} 
+                    direction={false} 
+                    data={this.state.recommend}
+                    />
                     <ul className='mainMenu'>
                         {this.state.mainMenu.map(item=>{
-                            return <ImgItem data={item} key={item.text} handleClick={this.handleClick}/>
+                            return (
+                                <ImgItem 
+                                data={item} 
+                                key={item.text} 
+                                handleClick={this.handleClick}/>
+                            )
                         })}
                     </ul>
                     <ul className='business'>
                         {this.state.business.map(item=>{
-                            return <ImgItem data={item} key={item.text} handleClick={this.handleClick}/>
+                            return (
+                                <ImgItem 
+                                data={item} 
+                                key={item.text} 
+                                handleClick={this.handleClick}/>
+                            )
                         })}
                     </ul>
                     <p>—— • 更多精彩，等你发现 • ——</p>
                 </div>
                 <FooterBar/>
-            </div>
-            
+            </div>  
         )
     }
 }

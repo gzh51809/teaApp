@@ -33,7 +33,6 @@ class List extends Component{
     }
 
     componentWillMount(){
-        // console.log(this.props);
         let {match}=this.props;
 
         this.setState({
@@ -45,7 +44,6 @@ class List extends Component{
                     qty:6
                 }
             }).then(res=>{
-                // console.log(res.data)
                 this.setState({
                     goods:res.data.data
                 })
@@ -64,7 +62,6 @@ class List extends Component{
                     rule:this.state.current
                 }
             }).then(res=>{
-                // console.log(res.data)
                 this.setState({
                     goods:res.data.data
                 })
@@ -100,9 +97,7 @@ class List extends Component{
                                 })
                             }
                         </ul>
-                        {/* <div className='rank_r'> */}
-                            <MyDrawer/>
-                        {/* </div> */}
+                        <MyDrawer/>
                     </div>
                     <GoodsItem data={this.state.goods} handleClick={this.handleClick}/>
                 </div>

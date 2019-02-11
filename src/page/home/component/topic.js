@@ -28,7 +28,6 @@ class Topic extends Component{
         this.handleClick=this.handleClick.bind(this);
     }
     handleClick(goodsid){
-        // console.log(goodsid,this)
         this.props.history.push('/detail/'+goodsid)
     }
 
@@ -39,17 +38,25 @@ class Topic extends Component{
                     白茶季 清甜礼
                 </div>
                 <div className='imgAd'>
-                    <img src='goodstopic/slideImg.jpg' alt='' onClick={this.handleClick.bind(this,55)}/>
+                    <img 
+                    src='goodstopic/slideImg.jpg' 
+                    alt='' 
+                    onClick={this.handleClick.bind(this,55)}/>
                 </div>
                 <div className='goodsItemHome'>
                     <div className='goods_l'>
-                        <img src='goodstopic/goodsTopAd.jpg' alt='' onClick={this.handleClick.bind(this,56)}/>
+                        <img 
+                        src='goodstopic/goodsTopAd.jpg' 
+                        alt='' 
+                        onClick={this.handleClick.bind(this,56)}/>
                     </div>
                     <ul className='goods_r'>
                         {
                             this.state.goods.map(item=>{
                                 return (
-                                    <li key={item.goodsid} onClick={this.handleClick.bind(this,item.goodsid)}>
+                                    <li 
+                                    key={item.goodsid} 
+                                    onClick={this.handleClick.bind(this,item.goodsid)}>
                                         <img src={item.imgurl} alt=''/>
                                     </li>
                                 )

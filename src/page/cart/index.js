@@ -1,7 +1,9 @@
 import React,{Component} from 'react';
 import FooterBar from '../../component/footerBar';
-import IconBar from '../../component/iconBar';
+import CartDetail from './component/cartDetail';
+import CartFooter from './component/cartFooter';
 import axios from'axios';
+import { Spin } from 'antd';
 import './cart.scss';
 
 class Cart extends Component{
@@ -13,13 +15,14 @@ class Cart extends Component{
             totalNum:0,
             totalPrice:0,
             goodsNum:1,
-            goodsEdit:true
+            goodsEdit:true,
+            token:'',
+            loading:true
         }
         this.handleClick=this.handleClick.bind(this);
         this.changeEdit=this.changeEdit.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.cut = this.cut.bind(this);
-        this.add = this.add.bind(this);
+        this.changeNumber=this.changeNumber.bind(this);
     }
 
     handleChange(e){
@@ -30,55 +33,54 @@ class Cart extends Component{
     handleClick(){
         this.props.history.push('/home');
     }
-    cut(){
-        // console.log('look',goodsId);
-        this.setState({
-            goodsNum:this.state.goodsNum-1<1?1:this.state.goodsNum-1
-        })
+    changeNumber(type){
+        if(type==='cut'){
+            this.setState({
+                goodsNum:this.state.goodsNum-1<1?1:this.state.goodsNum-1
+            })
+        }else if(type==='add'){
+            this.setState({
+                goodsNum:this.state.goodsNum*1+1>=20?20:this.state.goodsNum*1+1
+            })
+        }
     }
-    add(){
-        this.setState({
-            goodsNum:this.state.goodsNum*1+1>=20?20:this.state.goodsNum*1+1
-        })
-    }
+
     changeEdit(){
         this.setState({
             goodsEdit:!this.state.goodsEdit
         })
     }
-    componentDidMount(){
-        if(localStorage.getItem("tokenData")){
-            let storage=JSON.parse(localStorage.getItem("tokenData"));
+    async componentDidMount(){
+        let storage=JSON.parse(localStorage.getItem("tokenData"));
+        if(!storage){
+            this.props.history.push('/login');
+        }else{
             let token=storage.token;
-              axios.get(`${axios.axiosurl}/token`,{
+            this.setState({
+                token
+            })
+            let res=await axios.get(`${axios.axiosurl}/token`,{
                 headers:{
-                  token
+                  token:token
                 }
-              }).then(res=>{
-                if(res.data.code===200){
-                    this.setState({
-                        currentUser:storage.tel
-                    })
-
-                    axios.post(`${axios.axiosurl}/order`,{'tel':storage.tel})
-                    .then(res => {
-                        let data = res.data;
-                        this.setState({
-                            cartList:data.data
-                        },()=>{
-                            // console.log(this.state.cartList);
-                        })
-                    })
-
-                  }else{
-                    this.props.history.push('/login');
-                  }
+            });
+            if(res.data.code===200){
+                this.setState({
+                    currentUser:storage.tel
                 })
+                axios.post(`${axios.axiosurl}/order`,{'tel':storage.tel})
+                .then(res => {
+                    let data = res.data;
+                    this.setState({
+                        cartList:data.data
+                    });
+                });
             }else{
                 this.props.history.push('/login');
+            }
         }
     }
-
+    
     render(){
         return (
             <div className="page cart">
@@ -91,69 +93,22 @@ class Cart extends Component{
                         {
                             this.state.cartList.map((item,idx)=>{
                                 return (
-                                    <div className='cartItem' key={idx}>
-                                        <div className='cartBrand'>
-                                            <input type='checkbox'/>
-                                            <IconBar 
-                                            data={{'type':'img',
-                                            'text_l':item.brands,
-                                            'imgIcon':item.data[0].logo}}/>
-                                        </div>
-                                        <ul className='cartDetail'>
-                                            {item.data.map((item,idx)=>{
-                                                return (
-                                                    <li key={idx}>
-                                                        <input type='checkbox'/>
-                                                        <img src={item.imgs} alt=''/>
-                                                        <div>
-                                                            <p>{item.name}</p>
-                                                            <p className='price'>¥{item.price}</p>
-                                                            <div className='number'>
-                                                                <input 
-                                                                className='btn' 
-                                                                type='button'
-                                                                value='-' 
-                                                                onClick={()=>{
-                                                                    
-                                                                    this.cut();
-                                                                    console.log(this.refs)
-                                                                }}/>
-                                                                <input
-                                                                ref={item.name} 
-                                                                className='num' 
-                                                                type='text'
-                                                                value={item.number}
-                                                                onChange={this.handleChange}
-                                                                />
-                                                                <input 
-                                                                className='btn' 
-                                                                type='button' 
-                                                                value='+' 
-                                                                onClick={this.add}/>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                )
-                                            })}
-                                            
-                                        </ul>
-                                    </div>
+                                    <CartDetail 
+                                    item={item}
+                                    handleChange={this.handleChange}
+                                    changeNumber={this.changeNumber}
+                                    key={idx}
+                                    />
                                 )
                             })
                         }
                     </div>
                 </div>
-                <div className='cartFooter'>
-                    <div className={this.state.goodsEdit?'':'disappear'}>
-                        <label><input type='checkbox'/>全选</label>
-                        <p>合计：<span>¥{this.state.totalPrice}</span></p>
-                        <button>去结算({this.state.totalNum})</button>
-                    </div>
-                    <div className={this.state.goodsEdit?'disappear':''}>
-                        <label><input type='checkbox'/>全选</label>
-                        <button>删除</button>
-                    </div>
-                </div>
+                <CartFooter
+                goodsEdit={this.state.goodsEdit}
+                totalPrice={this.state.totalPrice}
+                totalNum={this.state.totalNum}
+                />
                 <FooterBar/>
             </div>
         )

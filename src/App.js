@@ -11,7 +11,6 @@ import Mine from './page/mine';
 import Setting from './page/mine/component/setting';
 import Login from './page/mine/component/login';
 import List from './page/list';
-
 import './sass/App.scss';
 import 'antd/dist/antd.css';
 import './iconfont/iconfont.css';

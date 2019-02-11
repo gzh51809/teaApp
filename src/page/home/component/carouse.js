@@ -1,6 +1,4 @@
 import React,{Component} from 'react';
-// import {Carousel} from 'antd';
-// import Swiper from '../../../component/swiper';
 import NewSwiper from '../../../component/newSwiper';
 import {withRouter} from 'react-router-dom';
 
@@ -39,19 +37,11 @@ class CarouseHome extends Component{
     render(){
         return (
             <div className='carouse'>
-                {/* <Carousel autoplay>
-                    {
-                        this.state.recommend.map(item=>{
-                            return (
-                                <div key={item.text}>
-                                    <img src={item.imgurl} alt=''/>
-                                </div>
-                            )
-                        })
-                    }
-                </Carousel> */}
-                {/* <Swiper type={'img'} direction={false} data={this.state.recommend}/> */}
-                <NewSwiper type={'img'} direction={'horizontal'} data={this.state.recommend} handleClick={this.handleClick}/>
+                <NewSwiper 
+                type={'img'} 
+                direction={'horizontal'} 
+                data={this.state.recommend} 
+                handleClick={this.handleClick}/>
             </div>
         )
     }

@@ -4,7 +4,6 @@ import FooterBar from '../../component/footerBar';
 import CategoryTab from './component/categoryTab';
 import CategoryCon from './component/categoryCon';
 import TitleBar from '../../component/titleBar';
-// import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import axios from'axios';
 import './category.scss';
@@ -45,8 +44,7 @@ class Category extends Component{
     }
 
     componentDidMount(){
-        axios.get(`${axios.axiosurl}/category/`,{}).then(res=>{
-            // console.log(res.data)
+        axios.get(`${axios.axiosurl}/category/`).then(res=>{
             this.setState({
                 category:res.data
             })
@@ -68,11 +66,23 @@ class Category extends Component{
             this.setState({
                 currentTab:cid,
                 sendData:[
-                    {'name':data[2].data,'text_l':'热门品牌','text_r':'更多品牌','type':'icon','class':'brands'
+                    {'name':data[2].data,
+                    'text_l':'热门品牌',
+                    'text_r':'更多品牌',
+                    'type':'icon',
+                    'class':'brands'
                     },{
-                        'name':data[0].data,'text_l':'产地','text_r':'','type':'','class':'place'
+                        'name':data[0].data,
+                        'text_l':'产地',
+                        'text_r':'',
+                        'type':'',
+                        'class':'place'
                     },{
-                        'name':data[1].data,'text_l':'价位','text_r':'','type':'','class':'price'
+                        'name':data[1].data,
+                        'text_l':'价位',
+                        'text_r':'',
+                        'type':'',
+                        'class':'price'
                     }
                 ],
                 renderData:data[2].data
@@ -99,7 +109,8 @@ class Category extends Component{
                         <h2 
                         className={this.state.currentTab===0?'activeTab':''} 
                         onClick={this.changeTab.bind(this,0)}
-                        >一键选茶</h2>
+                        >一键选茶
+                        </h2>
                         <CategoryTab 
                         data={this.state.category} 
                         currentTab={this.state.currentTab} 
@@ -121,7 +132,9 @@ class Category extends Component{
                                     className={this.state.currentTab===0?'disappear':item.class}>
                                         <p className='blankBar'></p>
                                         <TitleBar 
-                                        data={{'text_l':item.text_l,'text_r':item.text_r,'type':item.type}}
+                                        data={{'text_l':item.text_l,
+                                        'text_r':item.text_r,
+                                        'type':item.type}}
                                         handleClick={this.handleClick}
                                         />
                                         <CategoryCon 
@@ -141,6 +154,5 @@ class Category extends Component{
     }
 }
 
-// Category = connect()(Category);
 Category = withRouter(Category);
 export default Category;

@@ -54,13 +54,6 @@ class MyDrawer extends Component {
                 {
                 this.state.tabs.map(item=>{
                     return (
-                        // <h2 key={item.key}>
-                        //     <span>{item.name}</span>
-                        //     <span className='more'>
-                        //         全部&nbsp;
-                        //         <i className='iconfont icon-arrow-right-copy'></i>
-                        //     </span>
-                        // </h2>
                         <TitleBar 
                         key={item.key}
                         data={{'text_l':item.name,'text_r':'全部','type':'icon'}}
@@ -69,12 +62,6 @@ class MyDrawer extends Component {
                 })
             }
             </div>
-            
-            {/* <p>
-                <span></span>
-            </p>
-            <p>Some contents...</p>
-            <p>Some contents...</p> */}
           </Drawer>
         </div>
       );

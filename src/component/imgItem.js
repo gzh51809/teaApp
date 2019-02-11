@@ -2,7 +2,6 @@ import React from 'react';
 import '../sass/iconItem.scss';
 
 const ImgItem=({data,handleClick})=>{
-    // console.log(props);
     if(data.type){
         return (
             <li key={data.imgIcon} className='imgIcon' onClick={()=>{handleClick(data.path)}}>

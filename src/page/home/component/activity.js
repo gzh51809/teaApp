@@ -1,5 +1,4 @@
 import React,{Component} from 'react';
-// import {Carousel} from 'antd';
 import Swiper from '../../../component/swiper';
 
 class Activity extends Component{
@@ -29,18 +28,10 @@ class Activity extends Component{
                 </div>
                 <div className='actName'>
                     <div className='notice'></div>
-                    {/* <Carousel autoplay dots={false}>
-                        {
-                            this.state.text.map((item,idx)=>{
-                                return (
-                                    <p key={idx}>
-                                        {item.text}
-                                    </p>
-                                )
-                            })
-                        }
-                    </Carousel> */}
-                    <Swiper type={'text'} direction={false} data={this.state.text}/>
+                    <Swiper 
+                    type={'text'} 
+                    direction={false} 
+                    data={this.state.text}/>
                 </div>
                 <div className='moreAct'>
                     趣味拼团
@@ -51,9 +42,9 @@ class Activity extends Component{
                         <img src={require('../image/adBuy.jpeg')} alt=''/>
                         <div className='text'>
                             <span></span>
-                            <p className='name'>哈哈哈啊哈hahahhaah</p>
+                            <p className='name'>广盛昌 2018年小城故事陈皮白茶(第2期)</p>
                             <p className='price'>¥99.00</p>
-                            <p className='hot'>已有xxxxx</p>
+                            <p className='hot'>已有18人参团</p>
                         </div>
                     </li> 
                 </ul>
