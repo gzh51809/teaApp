@@ -18,8 +18,9 @@ import axios from'axios';
               let storage={'token':res.data.token,'tel':res.data.data}
               storage=JSON.stringify(storage);
               localStorage.setItem('tokenData', storage);
-              
-              history.push('/mine');
+
+              message.success('登录成功',history.push('/mine'));
+              // history.push('/mine');
             }else{
               message.info('账号或密码错误');
             }

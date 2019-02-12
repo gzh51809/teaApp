@@ -5,7 +5,7 @@ import {
     UPDATA_QTY
 } from '../actions/cartAction';
 
-let defaultState={goodslist:[],step:0}
+let defaultState={cartList:[],currentUser:'',totalNum:0,totalPrice:0,}
 let reducer=function(state=defaultState,action){
     let {type,payload}=action;
 
@@ -13,25 +13,34 @@ let reducer=function(state=defaultState,action){
         // 删除购物车商品
         case REMOVE_FROM_CART:
         return {
-            ...state,goodslist:state.goodslist.filter(item=>item.id!==payload.id)
+            ...state,
+            cartList:state.cartList.map(item=>{
+                item.data.filter(item=>item.goodsId!==payload.goodsId)
+                return item
+            })
         }
 
         //添加商品到购物车
         case ADD_TO_CART:
         return {
             ...state,
-            goodslist:[
-                ...state.goodslist,
-                payload]
+            // cartList:[
+            //     ...state.cartList,
+            //     payload]
+            cartList:state.cartList.map(item=>{
+                if(item.brands===payload.brands){
+                    item.data.push(payload)
+                }
+            })
         }
 
         //更新商品数量
         case UPDATA_QTY:
         return {
             ...state,
-            goodslist:state.goodslist.map(item=>{
-                if(item.id===payload.id){
-                    item.qty=payload.qty
+            cartList:state.cartList.map(item=>{
+                if(item.goodsId===payload.goodsId){
+                    item.number=payload.number
                 }
                 return item;
             })
@@ -41,7 +50,7 @@ let reducer=function(state=defaultState,action){
         case CLEAR_CART:
         return {
             ...state,
-            goodslist:[]
+            cartList:[]
         }
 
         default:

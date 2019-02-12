@@ -11,13 +11,13 @@ import './detail.scss';
 message.config({
     top: 50,
     duration: 1
-  });
+});
 
 const success=()=>{
     message.success('好茶链：添加成功');
 };
 const warning=()=>{
-    message.warning('好茶链：网络出了点小问题');
+    message.warning('好茶链：网络有点小问题');
 }
 
 class Detail extends Component{

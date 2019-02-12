@@ -3,8 +3,20 @@ import FooterBar from '../../component/footerBar';
 import CartDetail from './component/cartDetail';
 import CartFooter from './component/cartFooter';
 import axios from'axios';
-import { Spin } from 'antd';
+import { Modal, message } from 'antd';
 import './cart.scss';
+const confirm = Modal.confirm;
+
+message.config({
+    top: 50,
+    duration: 1
+});
+const success=()=>{
+    message.success('好茶链：删除成功');
+};
+const warning=()=>{
+    message.warning('好茶链：网络有点小问题');
+}
 
 class Cart extends Component{
     constructor(){
@@ -16,35 +28,185 @@ class Cart extends Component{
             totalPrice:0,
             goodsNum:1,
             goodsEdit:true,
-            token:'',
-            loading:true
+            token:''
         }
         this.handleClick=this.handleClick.bind(this);
         this.changeEdit=this.changeEdit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.changeNumber=this.changeNumber.bind(this);
+        this.selecteItem=this.selecteItem.bind(this);
+        this.removeItem=this.removeItem.bind(this);
+        this.updateAxios=this.updateAxios.bind(this);
+        this.noGoods=this.noGoods.bind(this);
     }
-
+    noGoods(){
+        if(this.state.cartList.length===0){
+            return true
+        }else{
+            return false
+        }
+    }
     handleChange(e){
         this.setState({
             goodsNum:e.target.value
         })
     }
+    // 更新数量、删除等操作重新发送请求
+    updateAxios(){
+        axios.post(`${axios.axiosurl}/order`,{'tel':this.state.currentUser})
+        .then(res => {
+            let data = res.data;
+            this.setState({
+                cartList:data.data
+            });
+        });
+    }
+
     handleClick(){
         this.props.history.push('/home');
     }
-    changeNumber(type){
-        if(type==='cut'){
-            this.setState({
-                goodsNum:this.state.goodsNum-1<1?1:this.state.goodsNum-1
+    // 删除确认框
+    showConfirm(sendAxios){
+        confirm({
+            title: '您确定要删除所选商品吗?',
+            content: '',
+            onOk() {
+                sendAxios();
+            },
+            onCancel() {
+                
+            },
+        });
+    }
+    // 删除
+    async removeItem(){
+        let delectEle=[];
+        let res;
+        let stateData=this.state.cartList;
+        stateData.map(item=>{
+            item.data.map(item=>{
+                if(item.selected){
+                    delectEle.push(item.goodsId);
+                }
+                return item
             })
-        }else if(type==='add'){
+            return item
+        })
+
+        let sendAxios=async function(data){
+            let resMsg;
+            for(var i=0;i<delectEle.length;i++){
+                let res=await axios.post(`${axios.axiosurl}/order/delete`,{'goodsid':delectEle[i],'tel':data});
+                if(res.data.code===1){
+                    resMsg=1
+                }else{
+                    resMsg=0
+                }
+            }
+            if(resMsg===1){
+                success();
+                this.updateAxios();
+            }else{
+                warning();
+            }
+        }
+
+        this.showConfirm(sendAxios.bind(this,this.state.currentUser));
+    }
+    // 计算总价
+    countTotal(){
+        let total=0;
+        let number=0;
+        this.state.cartList.map(item=>{
+            for(var i=0;i<item.data.length;i++){
+                if(item.data[i].selected){
+                    total+=item.data[i].number*item.data[i].price;
+                    number+=item.data[i].number
+                }
+            }
+            return item
+        })
+        // console.log(total)
+        this.setState({
+            totalPrice:total,
+            totalNum:number
+        })
+    }
+    // 选择商品
+    selecteItem(goodsId,status){
+        // console.log(status)
+        if(typeof goodsId == 'number'){
             this.setState({
-                goodsNum:this.state.goodsNum*1+1>=20?20:this.state.goodsNum*1+1
-            })
+                cartList:this.state.cartList.map(item=>{
+                    item.data.map(item=>{
+                        if(item.goodsId===goodsId){
+                            item.selected = !item.selected;
+                            return item
+                        }
+                    })
+                    return item;
+                })
+            }) 
+        }else{
+            if(goodsId==='checkAll'){
+                this.setState({
+                    cartList:this.state.cartList.map(item=>{
+                        item.data.map(item=>{
+                            item.selected=!status;
+                            return item
+                        })
+                        return item
+                    })
+                })
+            }else{
+                this.setState({
+                    cartList:this.state.cartList.map(item=>{
+                        if(item.brands===goodsId){
+                            item.data.map(item=>{
+                                item.selected = !status;
+                                return item
+                            })
+                        }
+                        return item;
+                    })
+                })
+            }
+        }
+
+        this.countTotal();
+    }
+    async sendQty(goodsId,tel,number){
+        let postData = {
+            goodsid: goodsId,
+            tel:tel,
+            number: number
+        };
+        let res=await axios.post(`${axios.axiosurl}/order/updategood`,postData);
+        if(res.data.code===1){
+            this.updateAxios();
+        }else{
+            warning();
         }
     }
-
+    // 更新数量
+    async changeNumber(type,goodsId,number){
+        if(type==='cut'){
+            if(number<=1){
+                return
+            }else{
+                number=number-1;
+                this.sendQty(goodsId,this.state.currentUser,number);
+            }
+        }else if(type==='add'){
+            if(number>=20){
+                return
+            }else{
+                number=number+1;
+                this.sendQty(goodsId,this.state.currentUser,number);
+            }
+        }
+    }
+    // 切换编辑/删除面板
     changeEdit(){
         this.setState({
             goodsEdit:!this.state.goodsEdit
@@ -67,14 +229,9 @@ class Cart extends Component{
             if(res.data.code===200){
                 this.setState({
                     currentUser:storage.tel
+                },()=>{
+                    this.updateAxios();
                 })
-                axios.post(`${axios.axiosurl}/order`,{'tel':storage.tel})
-                .then(res => {
-                    let data = res.data;
-                    this.setState({
-                        cartList:data.data
-                    });
-                });
             }else{
                 this.props.history.push('/login');
             }
@@ -90,6 +247,11 @@ class Cart extends Component{
                         <span className='fr' onClick={this.changeEdit}>编辑</span>
                     </h2>
                     <div className='cartList'>
+                        <p className={this.noGoods()?'show':'hidden'}>
+                            <img src={require('./image/cart-empty.png')}/>
+                            购物车空空如<br/>快去挑选你喜欢的商品吧！
+                            <button onClick={this.handleClick}>去逛逛</button>
+                        </p>
                         {
                             this.state.cartList.map((item,idx)=>{
                                 return (
@@ -98,6 +260,8 @@ class Cart extends Component{
                                     handleChange={this.handleChange}
                                     changeNumber={this.changeNumber}
                                     key={idx}
+                                    idx={idx}
+                                    selecteItem={this.selecteItem}
                                     />
                                 )
                             })
@@ -108,6 +272,9 @@ class Cart extends Component{
                 goodsEdit={this.state.goodsEdit}
                 totalPrice={this.state.totalPrice}
                 totalNum={this.state.totalNum}
+                selecteItem={this.selecteItem}
+                data={this.state.cartList}
+                removeItem={this.removeItem}
                 />
                 <FooterBar/>
             </div>

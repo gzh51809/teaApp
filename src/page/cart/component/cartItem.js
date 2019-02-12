@@ -1,9 +1,15 @@
 import React from 'react';
 
-const CartItem = ({idx,item,handleChange,changeNumber})=>{
+const CartItem = ({item,handleChange,changeNumber,selecteItem})=>{
     return (
         <li>
-            <input type='checkbox'/>
+            <input 
+            type='checkbox' 
+            checked={item.selected}
+            onChange={()=>{
+                selecteItem(item.goodsId)
+            }}
+            />
             <img src={item.imgs} alt=''/>
             <div>
                 <p>{item.name}</p>
@@ -14,7 +20,7 @@ const CartItem = ({idx,item,handleChange,changeNumber})=>{
                     type='button'
                     value='-' 
                     onClick={()=>{
-                        changeNumber('cut');
+                        changeNumber('cut',item.goodsId,item.number);
                     }}/>
                     <input
                     className='num' 
@@ -27,7 +33,7 @@ const CartItem = ({idx,item,handleChange,changeNumber})=>{
                     type='button' 
                     value='+' 
                     onClick={()=>{
-                        changeNumber('add');
+                        changeNumber('add',item.goodsId,item.number);
                     }}/>
                 </div>
             </div>

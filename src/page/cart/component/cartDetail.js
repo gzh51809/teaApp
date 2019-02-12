@@ -2,11 +2,18 @@ import React from 'react';
 import IconBar from '../../../component/iconBar';
 import CartItem from './cartItem';
 
-const CartDetail =({item,handleChange,changeNumber})=>{
+const CartDetail =({idx,item,handleChange,changeNumber,selecteItem})=>{
+    // console.log(selecteItem);
     return (
         <div className='cartItem'>
             <div className='cartBrand'>
-                <input type='checkbox'/>
+                <input 
+                type='checkbox'
+                checked={item.data.every(item=>item.selected)}
+                onChange={()=>{
+                    selecteItem(item.brands,item.data.every(item=>item.selected))
+                }}
+                />
                 <IconBar 
                 data={{
                     'type':'img',
@@ -22,6 +29,7 @@ const CartDetail =({item,handleChange,changeNumber})=>{
                         handleChange={handleChange} 
                         changeNumber={changeNumber}
                         key={idx}
+                        selecteItem={selecteItem}
                         />
                     )
                 })}

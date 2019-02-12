@@ -7,7 +7,6 @@ import Nav from './component/nav';
 import Activity from './component/activity';
 import Topic from './component/topic';
 import GoodsHot from './component/goodsHot';
-import { Spin } from 'antd';
 import './home.scss';
 
 class Home extends Component{
