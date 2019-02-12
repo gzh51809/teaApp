@@ -7,15 +7,15 @@ class goodsHot extends Component{
     constructor(){
         super();
         this.state={
-            goods:[]
+            goods:[],
+            currentPage:1
         }
         this.handleClick=this.handleClick.bind(this);
     }
-
     componentWillMount(){
         axios.get(`${axios.axiosurl}/list/hot`,{
             params:{
-                page:1,
+                page:this.state.currentPage,
                 qty:6
             }
         }).then(res=>{
@@ -24,7 +24,6 @@ class goodsHot extends Component{
             })
         })
     }
-
     handleClick(goodsId,path){
         if(path!==undefined){
             this.props.history.push('/list/1')

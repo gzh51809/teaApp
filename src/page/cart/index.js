@@ -36,8 +36,8 @@ class Cart extends Component{
         this.changeNumber=this.changeNumber.bind(this);
         this.selecteItem=this.selecteItem.bind(this);
         this.removeItem=this.removeItem.bind(this);
-        this.updateAxios=this.updateAxios.bind(this);
         this.noGoods=this.noGoods.bind(this);
+        this.updateAxios=this.updateAxios.bind(this);
     }
     noGoods(){
         if(this.state.cartList.length===0){
@@ -51,7 +51,11 @@ class Cart extends Component{
             goodsNum:e.target.value
         })
     }
-    // 更新数量、删除等操作重新发送请求
+    // 跳转其他页面
+    handleClick(){
+        this.props.history.push('/home');
+    }
+    // 删除商品，更新状态
     updateAxios(){
         axios.post(`${axios.axiosurl}/order`,{'tel':this.state.currentUser})
         .then(res => {
@@ -60,10 +64,6 @@ class Cart extends Component{
                 cartList:data.data
             });
         });
-    }
-
-    handleClick(){
-        this.props.history.push('/home');
     }
     // 删除确认框
     showConfirm(sendAxios){
@@ -81,7 +81,6 @@ class Cart extends Component{
     // 删除
     async removeItem(){
         let delectEle=[];
-        let res;
         let stateData=this.state.cartList;
         stateData.map(item=>{
             item.data.map(item=>{
@@ -134,15 +133,14 @@ class Cart extends Component{
     }
     // 选择商品
     selecteItem(goodsId,status){
-        // console.log(status)
         if(typeof goodsId == 'number'){
             this.setState({
                 cartList:this.state.cartList.map(item=>{
                     item.data.map(item=>{
                         if(item.goodsId===goodsId){
                             item.selected = !item.selected;
-                            return item
                         }
+                        return item
                     })
                     return item;
                 })
@@ -183,9 +181,9 @@ class Cart extends Component{
         };
         let res=await axios.post(`${axios.axiosurl}/order/updategood`,postData);
         if(res.data.code===1){
-            this.updateAxios();
+            // this.updateAxios();
         }else{
-            warning();
+            // warning();
         }
     }
     // 更新数量
@@ -205,6 +203,19 @@ class Cart extends Component{
                 this.sendQty(goodsId,this.state.currentUser,number);
             }
         }
+
+        this.countTotal();
+        this.setState({
+            cartList:this.state.cartList.map(item=>{
+                item.data.map(item=>{
+                    if(item.goodsId===goodsId){
+                        item.number=number
+                    }
+                    return item
+                })
+                return item
+            })
+        })
     }
     // 切换编辑/删除面板
     changeEdit(){
@@ -244,11 +255,14 @@ class Cart extends Component{
                 <div className="main">
                     <h2 className='header'>
                         <span>购物车</span>
-                        <span className='fr' onClick={this.changeEdit}>编辑</span>
+                        <span 
+                        className='fr' 
+                        onClick={this.changeEdit}>{this.state.goodsEdit?'编辑':'完成'}
+                        </span>
                     </h2>
                     <div className='cartList'>
                         <p className={this.noGoods()?'show':'hidden'}>
-                            <img src={require('./image/cart-empty.png')}/>
+                            <img src={require('./image/cart-empty.png')} alt=''/>
                             购物车空空如<br/>快去挑选你喜欢的商品吧！
                             <button onClick={this.handleClick}>去逛逛</button>
                         </p>
@@ -275,6 +289,7 @@ class Cart extends Component{
                 selecteItem={this.selecteItem}
                 data={this.state.cartList}
                 removeItem={this.removeItem}
+                noGoods={this.noGoods}
                 />
                 <FooterBar/>
             </div>

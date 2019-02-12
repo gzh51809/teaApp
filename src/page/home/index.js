@@ -15,6 +15,7 @@ class Home extends Component{
             loading:false
         })
     }
+
     render(){
         return (
             <div className="page home">

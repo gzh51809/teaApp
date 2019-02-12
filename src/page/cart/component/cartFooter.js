@@ -1,8 +1,8 @@
 import React from 'react';
 
-const CartFooter=({data,goodsEdit,totalPrice,totalNum,selecteItem,removeItem})=>{
+const CartFooter=({data,goodsEdit,totalPrice,totalNum,selecteItem,removeItem,noGoods})=>{
     return (
-        <div className='cartFooter'>
+        <div className={noGoods()?'hiddenFooter':'cartFooter'}>
             <div className={goodsEdit?'':'disappear'}>
                 <label>
                     <input 

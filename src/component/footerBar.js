@@ -42,7 +42,7 @@ class FooterBar extends Component {
 
         this.handleChange=this.handleChange.bind(this);
     }
-
+    
     handleChange({
         item,
         key,
