@@ -2,13 +2,15 @@ import React,{Component} from 'react';
 import GoodsItem from '../../../component/goodsItem';
 import {withRouter} from 'react-router-dom';
 import axios from'axios';
+import { Spin } from 'antd';
 
 class goodsHot extends Component{
     constructor(){
         super();
         this.state={
             goods:[],
-            currentPage:1
+            currentPage:1,
+            loading:true
         }
         this.handleClick=this.handleClick.bind(this);
     }
@@ -20,7 +22,8 @@ class goodsHot extends Component{
             }
         }).then(res=>{
             this.setState({
-                goods:res.data.data
+                goods:res.data.data,
+                loading:false
             })
         })
     }
@@ -42,7 +45,9 @@ class goodsHot extends Component{
                         <span className='iconfont icon-arrow-right-copy'></span>
                     </p>
                 </div>
-                <GoodsItem data={this.state.goods} handleClick={this.handleClick}/>
+                <Spin spinning={this.state.loading} size='large'>
+                    <GoodsItem data={this.state.goods} handleClick={this.handleClick}/>
+                </Spin>
             </div>
         )
     }

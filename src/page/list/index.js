@@ -3,6 +3,7 @@ import GoodsItem from '../../component/goodsItem';
 import HeaderBar from './component/search';
 import MyDrawer from './component/drawer';
 import axios from'axios';
+import { Spin } from 'antd';
 import './list.scss';
 
 class List extends Component{
@@ -26,7 +27,11 @@ class List extends Component{
                 }
             ],
             current:'_id',
-            currentCid:1
+            currentCid:1,
+            currentPage:1,
+            total:0,
+            loading:true,
+            loadingMore:false
         }
         this.handleClick=this.handleClick.bind(this);
         this.search=this.search.bind(this);
@@ -45,15 +50,28 @@ class List extends Component{
                 }
             }).then(res=>{
                 this.setState({
-                    goods:res.data.data
+                    goods:res.data.data,
+                    total:Math.ceil(res.data.total/6),
+                    loading:false
                 })
             })
         })
     }
-
+    componentDidMount() {
+        if (this.contentNode) {
+            this.contentNode.addEventListener('scroll', this.onScrollHandle.bind(this));
+        }
+    }
+    componentWillUnmount() {
+        if (this.contentNode) {
+            this.contentNode.removeEventListener('scroll', this.onScrollHandle.bind(this));
+        }
+    }
     changeRank(key){
         this.setState({
-            current:key
+            current:key,
+            currentPage:1,
+            loading:true
         },()=>{
             axios.get(`${axios.axiosurl}/list/goods/${this.state.currentCid}`,{
                 params:{
@@ -63,12 +81,46 @@ class List extends Component{
                 }
             }).then(res=>{
                 this.setState({
-                    goods:res.data.data
+                    goods:res.data.data,
+                    loading:false
                 })
             })
         })
     }
-
+    onScrollHandle(event) {
+        const clientHeight = event.target.clientHeight
+        const scrollHeight = event.target.scrollHeight
+        const scrollTop = event.target.scrollTop
+        const isBottom = (clientHeight + scrollTop === scrollHeight)
+        
+        if(isBottom){
+            if(this.state.currentPage+1>this.state.total){
+                return
+            }else{
+                this.setState({
+                    currentPage:this.state.currentPage+1,
+                    loadingMore:true
+                },()=>{
+                    axios.get(`${axios.axiosurl}/list/goods/${this.state.currentCid}`,{
+                        params:{
+                            page:this.state.currentPage,
+                            qty:6,
+                            rule:this.state.current
+                        }
+                    }).then(res=>{
+                        let goodsData=this.state.goods;
+                        for(var i=0;i<res.data.data.length;i++){
+                            goodsData.push(res.data.data[i]);
+                        }
+                        this.setState({
+                            goods:goodsData,
+                            loadingMore:false
+                        })
+                    })
+                })
+            }
+        }
+    }
     handleClick(goodsid){
         this.props.history.push('/detail/'+goodsid)
     }
@@ -81,7 +133,12 @@ class List extends Component{
     render(){
         return (
             <div className="page list">
-                <div className="main"> 
+                <Spin spinning={this.state.loading} size='large'/>
+                <div 
+                className="main"
+                ref={ node => this.contentNode = node }
+                style={{overflowY: "scroll"}}
+                > 
                     <HeaderBar search={this.search}/>
                     <div className='rank'>
                         <ul>
@@ -99,6 +156,7 @@ class List extends Component{
                         </ul>
                         <MyDrawer/>
                     </div>
+                    <Spin spinning={this.state.loadingMore} size='large'/>
                     <GoodsItem data={this.state.goods} handleClick={this.handleClick}/>
                 </div>
             </div>

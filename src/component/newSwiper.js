@@ -4,7 +4,6 @@ import 'swiper/dist/css/swiper.min.css';
 
 class NewSwiper extends Component{
     componentDidMount() {
-        // console.log(this.props);
         new Swiper('.swiper-container', {
             speed: 300,
             direction:this.props.direction,

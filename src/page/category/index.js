@@ -6,6 +6,7 @@ import CategoryCon from './component/categoryCon';
 import TitleBar from '../../component/titleBar';
 import {withRouter} from 'react-router-dom';
 import axios from'axios';
+import { Spin } from 'antd';
 import './category.scss';
 
 class Category extends Component{
@@ -37,7 +38,8 @@ class Category extends Component{
                 }
             ],
             renderData:[],
-            sendData:[]
+            sendData:[],
+            loading:true
         };
         this.changeTab=this.changeTab.bind(this);
         this.handleClick=this.handleClick.bind(this);
@@ -46,7 +48,8 @@ class Category extends Component{
     componentDidMount(){
         axios.get(`${axios.axiosurl}/category/`).then(res=>{
             this.setState({
-                category:res.data
+                category:res.data,
+                loading:false
             })
         })
 
@@ -64,31 +67,35 @@ class Category extends Component{
         }else{
             let data=this.state.category[cid-1].data;
             this.setState({
-                currentTab:cid,
-                sendData:[
-                    {'name':data[2].data,
-                    'text_l':'热门品牌',
-                    'text_r':'更多品牌',
-                    'type':'icon',
-                    'class':'brands'
-                    },{
-                        'name':data[0].data,
-                        'text_l':'产地',
-                        'text_r':'',
-                        'type':'',
-                        'class':'place'
-                    },{
-                        'name':data[1].data,
-                        'text_l':'价位',
-                        'text_r':'',
-                        'type':'',
-                        'class':'price'
-                    }
-                ],
-                renderData:data[2].data
+                loading:true
+            },()=>{
+                this.setState({
+                    currentTab:cid,
+                    sendData:[
+                        {'name':data[2].data,
+                        'text_l':'热门品牌',
+                        'text_r':'更多品牌',
+                        'type':'icon',
+                        'class':'brands'
+                        },{
+                            'name':data[0].data,
+                            'text_l':'产地',
+                            'text_r':'',
+                            'type':'',
+                            'class':'place'
+                        },{
+                            'name':data[1].data,
+                            'text_l':'价位',
+                            'text_r':'',
+                            'type':'',
+                            'class':'price'
+                        }
+                    ],
+                    renderData:data[2].data,
+                    loading:false
+                })
             })
         }
-        
     }
 
     handleClick(){
@@ -104,6 +111,7 @@ class Category extends Component{
         return (
             <div className="page category">
                 <HeaderBar/>
+                <Spin spinning={this.state.loading} size='large'/>
                 <div className="main">
                     <div className='categoryTab'>
                         <h2 
@@ -124,11 +132,11 @@ class Category extends Component{
                             type='icon' 
                             handleClick={this.handleClick}/>
                         </div>
-                        
                         {
                             this.state.sendData.map(item=>{
                                 return(
-                                    <div key={item.text_l} 
+                                    <div 
+                                    key={item.text_l} 
                                     className={this.state.currentTab===0?'disappear':item.class}>
                                         <p className='blankBar'></p>
                                         <TitleBar 

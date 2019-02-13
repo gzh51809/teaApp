@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import axios from'axios';
 import '../sass/headerBar.scss';
 
 class HeaderBar extends Component{
@@ -15,59 +14,10 @@ class HeaderBar extends Component{
     goto(path){
         this.props.history.push(path);
     }
-    search(){
-        clearTimeout(this.timer);
-        if (!this.keyword) return;
-        this.timer = setTimeout(() => {
-            axios.get(`${axios.axiosurl}/list/like`,{
-                params:{
-                    keyword:this.state.keyword,
-                    rule:this.state.current
-                }
-            }).then(res=>{
-                console.log(res.data)
-                // this.setState({
-                //     goods:res.data.data
-                // })
-            })
-        },1000)
-    }
     handleChange(e){
-        console.log('123')
         this.setState({
             keyword:e.target.value
-        },()=>{
-            // clearTimeout(this.timer);
-            // if (!this.keyword) return;
-            // this.timer = setTimeout(() => {
-            //     axios.get(`${axios.axiosurl}/list/like`,{
-            //         params:{
-            //             keyword:this.state.keyword,
-            //             rule:this.state.current
-            //         }
-            //     }).then(res=>{
-            //         console.log(res.data)
-            //         // this.setState({
-            //         //     goods:res.data.data
-            //         // })
-            //     })
-            // },1000)
         })
-
-        clearTimeout(this.timer);
-        if (!this.keyword) return;
-        this.timer = setTimeout(() => {
-            axios.get(`${axios.axiosurl}/list/like`,{
-                params:{
-                    keyword:e.target.value
-                }
-            }).then(res=>{
-                console.log(res.data)
-                // this.setState({
-                //     goods:res.data.data
-                // })
-            })
-        },1000)
     }
     render(){
         return (
@@ -85,7 +35,6 @@ class HeaderBar extends Component{
                         className='searchButton'
                         value={this.state.keyword}
                         onChange={this.handleChange}
-                        onBlur={this.serach}
                         ref="keyword"
                         />
                     </li>

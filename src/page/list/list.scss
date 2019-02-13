@@ -42,12 +42,24 @@
             }
         }
         .goodsItem{
-            margin-top:6.25rem;
+            margin-top:5.2rem;
             justify-content: space-around;
             li{
                 width:49.5%;
                 margin-bottom:.125rem;
                 box-shadow: .1875rem .1875rem .1875rem #f7f7f7,-0.1875rem -0.1875rem .1875rem #f7f7f7;
+            }
+        }
+        >.ant-spin-spinning{
+            z-index:100;
+            .ant-spin-dot{
+                width:1.8rem;
+                height: 1.8rem;
+                position: absolute;
+                right:0;
+                left:0;
+                bottom:.625rem;
+                margin:auto;
             }
         }
     }

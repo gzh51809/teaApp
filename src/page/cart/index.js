@@ -3,7 +3,7 @@ import FooterBar from '../../component/footerBar';
 import CartDetail from './component/cartDetail';
 import CartFooter from './component/cartFooter';
 import axios from'axios';
-import { Modal, message } from 'antd';
+import { Modal, message,Spin } from 'antd';
 import './cart.scss';
 const confirm = Modal.confirm;
 
@@ -28,7 +28,8 @@ class Cart extends Component{
             totalPrice:0,
             goodsNum:1,
             goodsEdit:true,
-            token:''
+            token:'',
+            loading:true
         }
         this.handleClick=this.handleClick.bind(this);
         this.changeEdit=this.changeEdit.bind(this);
@@ -70,6 +71,9 @@ class Cart extends Component{
         confirm({
             title: '您确定要删除所选商品吗?',
             content: '',
+            okText: '确定',
+            okType: 'danger',
+            cancelText: '取消',
             onOk() {
                 sendAxios();
             },
@@ -173,6 +177,7 @@ class Cart extends Component{
 
         this.countTotal();
     }
+    // 修改数量发送请求
     async sendQty(goodsId,tel,number){
         let postData = {
             goodsid: goodsId,
@@ -239,7 +244,8 @@ class Cart extends Component{
             });
             if(res.data.code===200){
                 this.setState({
-                    currentUser:storage.tel
+                    currentUser:storage.tel,
+                    loading:false
                 },()=>{
                     this.updateAxios();
                 })
@@ -248,10 +254,11 @@ class Cart extends Component{
             }
         }
     }
-    
+
     render(){
         return (
             <div className="page cart">
+                <Spin spinning={this.state.loading} size='large'/>
                 <div className="main">
                     <h2 className='header'>
                         <span>购物车</span>

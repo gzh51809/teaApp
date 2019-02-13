@@ -3,7 +3,6 @@ import IconBar from '../../../component/iconBar';
 import CartItem from './cartItem';
 
 const CartDetail =({idx,item,handleChange,changeNumber,selecteItem})=>{
-    // console.log(selecteItem);
     return (
         <div className='cartItem'>
             <div className='cartBrand'>

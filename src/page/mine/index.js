@@ -5,6 +5,7 @@ import MineTop from './component/mineTop';
 import MyIcon from './component/myIcon';
 import MyItem from './component/myItem';
 import axios from'axios';
+import { Spin } from 'antd';
 import './mine.scss';
 
 class Mine extends Component{
@@ -78,7 +79,8 @@ class Mine extends Component{
                 }
             ],
             currentStatus:'登录',
-            needLogin:true
+            needLogin:true,
+            loading:true
         }
         this.handleClick=this.handleClick.bind(this);
         this.goto=this.goto.bind(this);
@@ -103,7 +105,8 @@ class Mine extends Component{
                   
                 this.setState({
                     currentStatus:userTel,
-                    needLogin:false
+                    needLogin:false,
+                    loading:false
                 })
             }else{
                 this.setState({
@@ -115,7 +118,6 @@ class Mine extends Component{
     }
 
     goto(){
-
     }
     handleClick(){
         if(this.state.needLogin){
@@ -128,6 +130,7 @@ class Mine extends Component{
     render(){
         return (
             <div className="page mine">
+                <Spin spinning={this.state.loading} size='large'/>
                 <div className="main">
                     <MineTop 
                     data={this.state.myLogo}

@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import Swiper from '../../component/swiper';
-import {message} from 'antd';
+import {message,Spin} from 'antd';
 import TitleBar from '../../component/titleBar';
 import IconBar from '../../component/iconBar';
 import GoodsDetail from './component/goodsDetail';
@@ -44,7 +44,8 @@ class Detail extends Component{
                 }
             ],
             imgs:[],
-            goodsNum:1
+            goodsNum:1,
+            loading:true
         }
         this.handleClick=this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -62,7 +63,8 @@ class Detail extends Component{
         }).then(res=>{
             this.setState({
                 goodsDetail:res.data.data,
-                imgs:res.data.data.imgs
+                imgs:res.data.data.imgs,
+                loading:false
             })
         })
     }
@@ -132,6 +134,7 @@ class Detail extends Component{
     render(){
         return (
             <div className="page detail">
+                <Spin spinning={this.state.loading} size='large'/>
                 <div className="main">
                     <div className='header'>
                         <span 

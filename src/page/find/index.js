@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import Swiper from '../../component/swiper';
 import ImgItem from '../../component/imgItem';
 import FooterBar from '../../component/footerBar';
+import { Spin } from 'antd';
 import './find.scss';
 
 class Find extends Component{
@@ -13,6 +14,7 @@ class Find extends Component{
                 require('./image/searchBanner2.jpg'),
                 require('./image/searchBanner3.jpg')
             ],
+            loading:true,
             business:[
                 {
                     text:'专属定制',
@@ -54,12 +56,17 @@ class Find extends Component{
         }
         this.handleClick=this.handleClick.bind(this);
     }
-
+    componentDidMount(){
+        this.setState({
+            loading:false
+        })
+    }
     handleClick(){}
     
     render(){
         return (
             <div className="page find">
+                <Spin spinning={this.state.loading} size='large'/>
                 <div className="main">
                     <h2 className='header'>
                         <span>发现</span>
