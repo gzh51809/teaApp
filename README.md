@@ -24,7 +24,7 @@ react移动端项目
 |	|—— component                     公共组件
 |	|—— iconfont                      字体图标文件
 |	|—— page                          各分页
-|	|   |—— cart                  购物车
+|	| |—— cart                  购物车
 |	|	|—— category              分类
 |	|	|—— detail                详情页
 |	|	|—— find                  发现
@@ -34,7 +34,7 @@ react移动端项目
 |	|—— sass                         公共组件sass
 |	|—— App.js                       主组件
 |	|—— index.js                     入口文件
-|	|—— serviceWorker.js                serviceWorker
+|	|—— serviceWorker.js                  serviceWorker
 |—— READNE.md                           READNE
 |—— package-lock.json                   package-lock
 |—— package.json                        package
