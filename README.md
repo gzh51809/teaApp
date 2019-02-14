@@ -15,28 +15,31 @@ react移动端项目
 ### 项目演示地址：http://39.108.252.230:4005/#/home
 
 ### 项目目录结构
-```
-|—— config                               配置文件
-|—— doc                                  项目说明文档
-|—— public                               外部图片等资源、项目模板文件
-|—— scripts                              关于build/test/start
-|—— src                                  开发目录
-|	|—— component                     公共组件
-|	|—— iconfont                      字体图标文件
-|	|—— page                          各分页
-|	|   |—— cart                  购物车
-|	|	|—— category              分类
-|	|	|—— detail                详情页
-|	|	|—— find                  发现
-|	|	|—— home                  主页
-|	|	|—— list                  商品列表
-|	|	|—— mine                  我的
-|	|—— sass                         公共组件sass
-|	|—— App.js                       主组件
-|	|—— index.js                     入口文件
-|	|—— serviceWorker.js                serviceWorker
-|—— READNE.md                           READNE
-|—— package-lock.json                   package-lock
-|—— package.json                        package
-```
+
+
+
+
+- config--------------------------------配置文件
+- doc-----------------------------------项目说明文档
+- public--------------------------------外部图片等资源、项目模板文件
+- scripts-------------------------------关于build/test/start
+- src------------------------------------开发目录
+	- component--------------------公共组件
+	- iconfont------------------------字体图标文件
+	- page----------------------------各分页
+		- cart------------------------购物车
+		- category------------------分类
+		- detail----------------------详情页
+		- find------------------------发现
+		- home----------------------主页
+		- list--------------------------商品列表
+		- mine------------------------我的
+	- sass------------------------------公共组件sass
+	- App.js----------------------------主组件
+	- index.js--------------------------入口文件
+	- serviceWorker.js---------------serviceWorker
+- READNE.md--------------------------READNE
+- package-lock.json-------------------package-lock
+- package.json-------------------------package
+
 

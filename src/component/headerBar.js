@@ -24,7 +24,7 @@ class HeaderBar extends Component{
             <div className='headerBar'>
                 <ul>
                     {/* home */}
-                    <li onClick={this.goto.bind(this,'/sweep')}>
+                    <li onClick={this.goto.bind(this,'/home')}>
                         <span className='iconfont icon-saoyisao'></span>
                         <span className='myHome'>扫一扫</span>
                     </li>
@@ -38,7 +38,7 @@ class HeaderBar extends Component{
                         ref="keyword"
                         />
                     </li>
-                    <li className='myHome' onClick={this.goto.bind(this,'/notice')}>
+                    <li className='myHome' onClick={this.goto.bind(this,'/home')}>
                         <span className='iconfont icon-tongzhi'></span>
                         <span>消息</span>
                     </li>

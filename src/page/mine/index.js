@@ -90,7 +90,9 @@ class Mine extends Component{
         let storage=JSON.parse(localStorage.getItem("tokenData"));
 
         if(!storage){
-            this.noLogin=true;
+            this.setState({
+                loading:false
+            })
         }else{
             let token=storage.token;
             let res=await axios.get(`${axios.axiosurl}/token`,{
@@ -111,7 +113,8 @@ class Mine extends Component{
             }else{
                 this.setState({
                     currentStatus:'登录',
-                    needLogin:true
+                    needLogin:true,
+                    loading:false
                 })
             }
         }
