@@ -31,7 +31,8 @@ class List extends Component{
             currentPage:1,
             total:0,
             loading:true,
-            loadingMore:false
+            loadingMore:false,
+            noMoreGoods:false
         }
         this.handleClick=this.handleClick.bind(this);
         this.search=this.search.bind(this);
@@ -95,6 +96,9 @@ class List extends Component{
         
         if(isBottom){
             if(this.state.currentPage+1>this.state.total){
+                this.setState({
+                    noMoreGoods:true
+                })
                 return
             }else{
                 this.setState({
@@ -158,6 +162,16 @@ class List extends Component{
                     </div>
                     <Spin spinning={this.state.loadingMore} size='large'/>
                     <GoodsItem data={this.state.goods} handleClick={this.handleClick}/>
+                    <p 
+                    style={{
+                        display:this.state.noMoreGoods?'block':'none',
+                        width:'100%',
+                        height:'50px',
+                        lineHeight:'50px',
+                        textAlign:'center',
+                        color:'#999'}}>
+                    —— • 到底了 • ——
+                    </p>
                 </div>
             </div>
         )

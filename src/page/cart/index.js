@@ -29,7 +29,8 @@ class Cart extends Component{
             goodsNum:1,
             goodsEdit:true,
             token:'',
-            loading:true
+            loading:true,
+            noGoods:false
         }
         this.handleClick=this.handleClick.bind(this);
         this.changeEdit=this.changeEdit.bind(this);
@@ -37,16 +38,9 @@ class Cart extends Component{
         this.changeNumber=this.changeNumber.bind(this);
         this.selecteItem=this.selecteItem.bind(this);
         this.removeItem=this.removeItem.bind(this);
-        this.noGoods=this.noGoods.bind(this);
         this.updateAxios=this.updateAxios.bind(this);
     }
-    noGoods(){
-        if(this.state.cartList.length===0){
-            return true
-        }else{
-            return false
-        }
-    }
+    
     handleChange(e){
         this.setState({
             goodsNum:e.target.value
@@ -62,7 +56,8 @@ class Cart extends Component{
         .then(res => {
             let data = res.data;
             this.setState({
-                cartList:data.data
+                cartList:data.data,
+                noGoods:data.data.length>0?false:true
             });
         });
     }
@@ -228,7 +223,7 @@ class Cart extends Component{
             goodsEdit:!this.state.goodsEdit
         })
     }
-    async componentDidMount(){
+    async componentWillMount(){
         let storage=JSON.parse(localStorage.getItem("tokenData"));
         if(!storage){
             this.props.history.push('/login');
@@ -268,7 +263,7 @@ class Cart extends Component{
                         </span>
                     </h2>
                     <div className='cartList'>
-                        <p className={this.noGoods()?'show':'hidden'}>
+                        <p className={this.state.noGoods?'show':'hidden'}>
                             <img src={require('./image/cart-empty.png')} alt=''/>
                             购物车空空如<br/>快去挑选你喜欢的商品吧！
                             <button onClick={this.handleClick}>去逛逛</button>
@@ -296,7 +291,7 @@ class Cart extends Component{
                 selecteItem={this.selecteItem}
                 data={this.state.cartList}
                 removeItem={this.removeItem}
-                noGoods={this.noGoods}
+                noGoods={this.state.noGoods}
                 />
                 <FooterBar/>
             </div>
